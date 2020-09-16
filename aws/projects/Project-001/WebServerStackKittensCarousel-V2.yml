@@ -21,8 +21,8 @@ Resources:
     ImageId: ami-0c94855ba95c71c99
     InstanceType: t2.micro
     KeyName: levo
-    SecurityGroups:
-    - Ref: KittensCarouselSecGr
+    SecurityGroupIds:
+      - !Ref KittensCarouselSecGr
     Tags:
      - Key: "Name"
        Value: !Join
@@ -51,8 +51,8 @@ Resources:
            sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/cat1.jpg
            sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/cat2.jpg
 Outputs:
-  PublicDNS:
-    Description: Public DNS Name of the EC2 instance
+  WebSiteURL:
+    Description: URL for static website Kitten's Carousel
     Value: !Join 
       - "://"
       - - "http"
