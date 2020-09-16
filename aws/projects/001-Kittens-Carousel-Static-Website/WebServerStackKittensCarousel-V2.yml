@@ -46,10 +46,10 @@ Resources:
           
            #getting index.html
            cd /var/www/html 
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/index.html
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/cat0.jpg
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/cat1.jpg
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/cat2.jpg
+           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/001-Kittens-Carousel-Static-Website/static-web/index.html
+           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/001-Kittens-Carousel-Static-Website/static-web/cat0.jpg
+           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/001-Kittens-Carousel-Static-Website/static-web/cat1.jpg
+           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/001-Kittens-Carousel-Static-Website/static-web/cat2.jpg
 Outputs:
   WebSiteURL:
     Description: URL for static website Kitten's Carousel
