@@ -1,7 +1,14 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: AWS CloudFormation template runs appache server and displays a static webpage on a single EC2 instance.
+
+Parameters:
+  ConverterKey:
+    Description: Key files parameters
+    Type: "AWS::EC2::KeyPair::KeyName"
+    Default: 
+
 Resources:
- KittensCarouselSecGr:
+ ConverterSecGr:
   Type: "AWS::EC2::SecurityGroup"
   Properties:
     GroupDescription: Allows SSH and HTTP #required
@@ -20,9 +27,9 @@ Resources:
   Properties:
     ImageId: ami-0c94855ba95c71c99
     InstanceType: t2.micro
-    KeyName: levo
+    KeyName: !Ref "ConverterKey"
     SecurityGroups:
-    - Ref: KittensCarouselSecGr
+    - Ref: ConverterSecGr
     Tags:
      - Key: "Name"
        Value: !Join
@@ -32,19 +39,11 @@ Resources:
     UserData:
         'Fn::Base64': 
           !Sub |
-           #!/bin/bash
-           yum update -y
+ 
 
-           # install apache
-           yum install httpd -y 
-            
-           # start server
-           systemctl start httpd
-           systemctl enable httpd
-           # service httpd start
-           # chkconfig httpd on
-          
-           #getting index.html
+           #getting index.html, result.html, converter_app.py
+           
+           
            cd /var/www/html 
            sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/index.html
            sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/101-kittens-carousel-static-website-ec2/static-web/cat0.jpg
