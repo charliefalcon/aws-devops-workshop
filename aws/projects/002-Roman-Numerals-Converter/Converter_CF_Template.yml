@@ -22,12 +22,12 @@ Resources:
     GroupName: Coverter_Sec_Group
     SecurityGroupIngress:
     - IpProtocol: tcp
-      FromPort: "80"
-      ToPort: "80"
+      FromPort: 80
+      ToPort: 80
       CidrIp: 0.0.0.0/0
     - IpProtocol: tcp
-      FromPort: "22"
-      ToPort: "22"
+      FromPort: 22
+      ToPort: 22
       CidrIp: 0.0.0.0/0        
  WebServerInstance:
   Type: "AWS::EC2::Instance"
@@ -40,28 +40,19 @@ Resources:
     Tags:
      - Key: "Name"
        Value: !Join [ " ", ["Web Server of", !Ref "AWS::StackName" ] ]
-    UserData:
-        'Fn::Base64': 
-          !Sub |
-           #!/bin/bash
-           
-           yum update -y
-
-           yum install python3 -y
-
-           pip3 install flask
-
-           #getting index.html, result.html, converter_app.py
-           
-           mkdir templates
-           cd templates 
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/002-Roman-Numerals-Converter/templates/index.html
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/002-Roman-Numerals-Converter/templates/result.html
-           
-           cd ..
-           sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/002-Roman-Numerals-Converter/converter_app.py
-
-           python3 converter_app.py
+    
+    UserData: !Base64: |
+      #!/bin/bash
+      yum update -y
+      yum install python3 -y
+      pip3 install flask
+      #getting index.html, result.html, converter_app.py
+      mkdir templates
+      cd templates 
+      sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/002-Roman-Numerals-Converter/templates/index.html
+      sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/002-Roman-Numerals-Converter/templates/result.html      cd ..
+      sudo wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/aws/projects/002-Roman-Numerals-Converter/converter_app.py
+      python3 converter_app.py
 
 Outputs:
   WebSiteURL:
