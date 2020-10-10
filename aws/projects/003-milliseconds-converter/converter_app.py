@@ -24,5 +24,5 @@ def check_do():
 
 
 if __name__ == '__main__':
-    converter_app.run(debug = True)
-    #converter_app.run(host='0.0.0.0', port=80)
+    #converter_app.run(debug = True)
+    converter_app.run(host='0.0.0.0', port=80)
