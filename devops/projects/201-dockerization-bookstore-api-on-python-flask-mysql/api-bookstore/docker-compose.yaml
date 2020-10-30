@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:mysql-5.7
+    restart: always
+    volumes:
+      - data:var/lib/mysql
+    environment:
+      MYSQL_DATABASE_HOST:  database
+      MYSQL_DATABASE_USER:  clarusway
+      MYSQL_DATABASE_PASSWORD: Clarusway_1
+      MYSQL_DATABASE_DB:  bookstore_db
+      MYSQL_DATABASE_PORT:  3306
+    networks:
+      - bookstorenet
+  bookstore-api:
+    image:
+    depends_on:
+      - database
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+    networks:
+      - bookstorenet
+
+volumes:
+  data:
+
+
+networks:
+  bookstorenet:
+    driver: bridge
+  
