@@ -1,9 +1,6 @@
-FROM python:alpine3.12
-
+FROM python:alpine
+COPY . /api-bookstore
 WORKDIR /api-bookstore
-
-ADD . /api-bookstore
-
 RUN pip install -r requirements.txt
-
-CMD ["python","bookstore-api.py"]
+EXPOSE 80
+CMD python ./bookstore-api.py
