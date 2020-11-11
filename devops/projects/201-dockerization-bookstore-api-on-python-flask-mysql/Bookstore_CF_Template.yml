@@ -27,33 +27,29 @@ Resources:
     InstanceType: t2.micro
     KeyName: !Ref Key
     SecurityGroupIds:
-      - !Ref BookstoreSecGr
+      - !GetAtt BookstoreSecGr.GroupId
     Tags:
      - Key: "Name"
-       Value: !Sub Web Server of ${AWS::StackName} Stack
+       Value: !Sub Docker Machine of ${AWS::StackName} Stack
     
     UserData: 
-      Fn::Base64: 
-        !Sub |
-          #!/bin/bash
-          yum update -y
-          amazon-linux-extras install docker -y
-          systemctl start docker
-          systemctl enable docker
-          usermod -a -G docker ec2-user
-          curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" \
-          -o /usr/local/bin/docker-compose
-
-
-          chmod +x /usr/local/bin/docker-compose
-          mkdir api-bookstore
-          cd api-bookstore 
-          wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/bookstore-api.py
-          wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/docker-compose.yaml
-          wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/dockerfile
-          wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/requirements.txt
-          service docker start
-          docker-compose up -d
+      Fn::Base64: |
+        #!/bin/bash
+        yum update -y
+        amazon-linux-extras install docker -y
+        systemctl start docker
+        systemctl enable docker
+        usermod -a -G docker ec2-user
+        curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+        mkdir -p /home/ec2-user/api-bookstore
+        cd api-bookstore 
+        wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/bookstore-api.py
+        wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/docker-compose.yml
+        wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/dockerfile
+        wget https://raw.githubusercontent.com/charliefalcon/aws-devops-workshop/master/devops/projects/201-dockerization-bookstore-api-on-python-flask-mysql/api-bookstore/requirements.txt
+        service docker start
+        docker-compose up -d
 
 
 Outputs:
