@@ -5,7 +5,6 @@ services:
     environment:
 
       MYSQL_ROOT_PASSWORD: Pl123456
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookstore_db
       MYSQL_USER:  clarusway
       MYSQL_PASSWORD: Clarusway_1
