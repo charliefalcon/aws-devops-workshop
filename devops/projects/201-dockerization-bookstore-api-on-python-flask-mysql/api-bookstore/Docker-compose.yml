@@ -1,14 +1,12 @@
 version: "3.7"
-
 services:
   database:
-    image: mysql:5.7
-    restart: always
+    image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: bookstore_db
-      MYSQL_USER:  clarusway
-      MYSQL_PASSWORD: Clarusway_1
+      - MYSQL_ROOT_PASSWORD: root
+      - MYSQL_DATABASE: bookstore_db
+      - MYSQL_USER:  clarusway
+      - MYSQL_PASSWORD: Clarusway_1
     networks:
       - bookstorenet
   bookstore-api:
@@ -20,7 +18,6 @@ services:
       - "80:80"
     networks:
       - bookstorenet
-
 networks:
   bookstorenet:
     driver: bridge
