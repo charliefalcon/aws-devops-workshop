@@ -3,16 +3,14 @@ services:
   database:
     image: mysql:latest
     environment:
-
       MYSQL_ROOT_PASSWORD: Pl123456
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bookstore_db
       MYSQL_USER:  clarusway
       MYSQL_PASSWORD: Clarusway_1
     networks:
       - bookstorenet
   bookstore-api:
-    image: charliefalcon/bookstore:latest
+    image: charliefalcon/bookstore: latest
     restart: always
     depends_on:
       - database
